@@ -44,6 +44,13 @@ function escapeHtml(value = '') {
     .replaceAll("'", '&#039;');
 }
 
+function linkedImage({ src, alt, dimensions = '', loadingAttributes = 'loading="lazy"' }) {
+  return `<a class="image-link" href="${escapeHtml(src)}" target="_blank" rel="noopener" title="Open full-size image in a new tab">
+        <img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" ${dimensions} ${loadingAttributes}>
+        <span class="visually-hidden">Open full-size image in a new tab.</span>
+      </a>`;
+}
+
 function imageFigure(metadata, className = '') {
   if (!metadata.image) return '';
 
@@ -56,7 +63,7 @@ function imageFigure(metadata, className = '') {
 
   return `
     <figure class="chapter__visual ${className}">
-      <img src="${escapeHtml(metadata.image)}" alt="${escapeHtml(metadata.alt)}" ${dimensions} ${loadingAttributes}>
+      ${linkedImage({ src: metadata.image, alt: metadata.alt, dimensions, loadingAttributes })}
       ${metadata.caption ? `<figcaption>${escapeHtml(metadata.caption)}</figcaption>` : ''}
     </figure>`;
 }
@@ -69,7 +76,11 @@ function featureVisual(metadata) {
     <div class="feature-art">
       ${primary}
       <figure class="chapter__visual chapter__visual--secondary">
-        <img src="${escapeHtml(metadata.secondary_image)}" alt="${escapeHtml(metadata.secondary_alt)}" width="${escapeHtml(metadata.secondary_width)}" height="${escapeHtml(metadata.secondary_height)}" loading="lazy">
+        ${linkedImage({
+          src: metadata.secondary_image,
+          alt: metadata.secondary_alt,
+          dimensions: `width="${escapeHtml(metadata.secondary_width)}" height="${escapeHtml(metadata.secondary_height)}"`
+        })}
         <figcaption>${escapeHtml(metadata.secondary_caption)}</figcaption>
       </figure>
     </div>`;
