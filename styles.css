@@ -548,188 +548,9 @@ figcaption {
   aspect-ratio: 0.92;
 }
 
-/* Homework concept placeholder */
-.homework-art {
-  position: relative;
-  min-height: min(66vw, 620px);
-  overflow: hidden;
-  background:
-    linear-gradient(160deg, transparent 0 63%, rgba(80, 44, 28, 0.2) 63% 64%, transparent 64%),
-    linear-gradient(145deg, #edc77e, #b86f4b 72%, #704137);
-  border: 1px solid rgba(71, 43, 27, 0.24);
-  border-radius: 0.8rem;
-  box-shadow: var(--shadow);
-}
-
-.homework-art::after {
-  position: absolute;
-  top: -24%;
-  right: -18%;
-  width: 68%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  content: "";
-  background: rgba(255, 238, 184, 0.34);
-  box-shadow: 0 0 100px rgba(255, 219, 141, 0.55);
-}
-
-.homework-art figcaption {
-  position: absolute;
-  z-index: 8;
-  right: 1rem;
-  bottom: 0.85rem;
-  left: 1rem;
-  color: rgba(255, 249, 226, 0.84);
-}
-
-.homework-art__window {
-  position: absolute;
-  z-index: 1;
-  top: 9%;
-  right: 8%;
-  width: 31%;
-  height: 38%;
-  background:
-    linear-gradient(90deg, transparent 48%, rgba(95, 55, 36, 0.42) 48% 52%, transparent 52%),
-    linear-gradient(transparent 48%, rgba(95, 55, 36, 0.42) 48% 52%, transparent 52%),
-    #f7d99b;
-  border: 0.45rem solid rgba(95, 55, 36, 0.68);
-  box-shadow: 0 0 50px rgba(255, 218, 143, 0.65);
-}
-
-.homework-art__person {
-  position: absolute;
-  z-index: 4;
-  bottom: 30%;
-  width: 18%;
-  height: 36%;
-  background: #f2eee4;
-  border-radius: 48% 48% 12% 12%;
-  transform-origin: bottom;
-}
-
-.homework-art__person span {
-  position: absolute;
-  top: -29%;
-  left: 22%;
-  width: 58%;
-  aspect-ratio: 0.88;
-  background: #bd7650;
-  border: 0.35rem solid #412d24;
-  border-radius: 48% 48% 45% 45%;
-}
-
-.homework-art__person--hero {
-  left: 21%;
-  border-left: 0.55rem solid #22251f;
-  transform: rotate(7deg);
-}
-
-.homework-art__person--hero::after {
-  position: absolute;
-  top: 5%;
-  left: 48%;
-  width: 0.7rem;
-  height: 56%;
-  content: "";
-  background: #292b27;
-  clip-path: polygon(20% 0, 80% 0, 100% 82%, 50% 100%, 0 82%);
-}
-
-.homework-art__person--child {
-  left: 54%;
-  width: 15%;
-  height: 29%;
-  background: #617c68;
-  transform: rotate(-5deg);
-}
-
-.homework-art__person--child span {
-  background: #8b573c;
-}
-
-.homework-art__cape {
-  position: absolute;
-  z-index: 2;
-  bottom: 26%;
-  left: 10%;
-  width: 23%;
-  height: 40%;
-  background: #275e38;
-  clip-path: polygon(50% 0, 100% 15%, 78% 100%, 0 90%);
-  transform: rotate(-8deg);
-}
-
-.homework-art__table {
-  position: absolute;
-  z-index: 5;
-  right: 6%;
-  bottom: 13%;
-  left: 6%;
-  height: 22%;
-  background: #704536;
-  border-top: 1rem solid #4e3027;
-  box-shadow: 0 1.5rem 0 rgba(64, 39, 31, 0.45);
-  transform: perspective(500px) rotateX(5deg);
-}
-
-.homework-art__book {
-  position: absolute;
-  top: -5%;
-  left: 37%;
-  width: 31%;
-  height: 45%;
-  background: linear-gradient(90deg, #f5e6bf 49%, #bfaa7e 50% 51%, #f5e6bf 52%);
-  border: 2px solid #60453a;
-  transform: rotate(-3deg);
-}
-
-.homework-art__book::after {
-  position: absolute;
-  inset: 18% 12%;
-  content: "";
-  background: repeating-linear-gradient(transparent 0 0.45rem, rgba(80, 78, 72, 0.25) 0.5rem 0.55rem);
-}
-
-.homework-art__pencil {
-  position: absolute;
-  top: 42%;
-  left: 70%;
-  width: 16%;
-  height: 0.35rem;
-  background: #e1a82c;
-  transform: rotate(-11deg);
-}
-
-.homework-art__mug {
-  position: absolute;
-  top: -5%;
-  left: 15%;
-  width: 9%;
-  aspect-ratio: 1;
-  background: #e5ddd0;
-  border-radius: 0 0 35% 35%;
-}
-
-.homework-art__equipment {
-  position: absolute;
-  z-index: 3;
-  bottom: 6%;
-  left: 12%;
-  width: 13%;
+/* Homework scene */
+.chapter--homework .chapter__visual img {
   aspect-ratio: 1.25;
-  background: #272a26;
-  border: 0.45rem solid #151714;
-  border-radius: 0.3rem;
-  box-shadow: inset 0 0 0 0.35rem #414640;
-}
-
-.homework-art__equipment::after {
-  position: absolute;
-  inset: 29%;
-  border: 0.25rem solid #81c742;
-  border-radius: 50%;
-  content: "";
 }
 
 /* Dossier */
@@ -1028,9 +849,6 @@ figcaption {
     grid-template-columns: 1fr 0.45fr;
   }
 
-  .homework-art {
-    min-height: min(95vw, 620px);
-  }
 }
 
 @media (max-width: 600px) {
@@ -1110,16 +928,6 @@ figcaption {
 
   .dossier-mark {
     min-height: 310px;
-  }
-
-  .homework-art__person--hero {
-    left: 17%;
-    width: 22%;
-  }
-
-  .homework-art__person--child {
-    left: 55%;
-    width: 19%;
   }
 
   .site-footer {

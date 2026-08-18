@@ -3,7 +3,11 @@ id: quiet-strength
 chapter: 04 / Off Duty
 layout: homework
 theme: warm
+image: img/homework.png
+image_width: 1402
+image_height: 1122
 alt: The unmasked Amplifier gently helps a child understand their homework at a kitchen table.
+caption: A quieter kind of power.
 ---
 ## Not every problem needs maximum volume.
 

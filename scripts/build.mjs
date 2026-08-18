@@ -61,23 +61,6 @@ function imageFigure(metadata, className = '') {
     </figure>`;
 }
 
-function homeworkPlaceholder(metadata) {
-  return `
-    <figure class="chapter__visual homework-art" role="img" aria-label="${escapeHtml(metadata.alt)}">
-      <div class="homework-art__window" aria-hidden="true"></div>
-      <div class="homework-art__cape" aria-hidden="true"></div>
-      <div class="homework-art__person homework-art__person--hero" aria-hidden="true"><span></span></div>
-      <div class="homework-art__person homework-art__person--child" aria-hidden="true"><span></span></div>
-      <div class="homework-art__table" aria-hidden="true">
-        <div class="homework-art__book"></div>
-        <div class="homework-art__pencil"></div>
-        <div class="homework-art__mug"></div>
-      </div>
-      <div class="homework-art__equipment" aria-hidden="true"></div>
-      <figcaption>Concept artwork placeholder · ready for the final homework scene</figcaption>
-    </figure>`;
-}
-
 function featureVisual(metadata) {
   const primary = imageFigure(metadata, 'chapter__visual--primary');
   if (!metadata.secondary_image) return primary;
@@ -93,7 +76,6 @@ function featureVisual(metadata) {
 }
 
 function decorativeVisual(layout, metadata) {
-  if (layout === 'homework') return homeworkPlaceholder(metadata);
   if (layout === 'feature') return featureVisual(metadata);
   if (metadata.image) return imageFigure(metadata);
 
