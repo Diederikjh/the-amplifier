@@ -26,10 +26,12 @@ Then open <http://localhost:4173>. Press `Ctrl+C` in the terminal to stop the se
 ## Project structure
 
 - `content/` — editable Markdown copy and section metadata
+- `content/extras/` — editable copy for bonus pages such as the Edition 2 preview
 - `template.html` — shared HTML document shell
 - `scripts/build.mjs` — Markdown-to-HTML build step
 - `styles.css` — responsive visual design
 - `index.html` — generated static website
+- `edition-2.html` — generated easter-egg preview page
 - `img/` — website artwork
 
 The generated `index.html`, `styles.css`, and `img/` directory can be hosted directly with GitHub Pages.

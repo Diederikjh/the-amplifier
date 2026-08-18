@@ -7,6 +7,9 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const contentDirectory = path.join(root, 'content');
 const templatePath = path.join(root, 'template.html');
 const outputPath = path.join(root, 'index.html');
+const previewContentPath = path.join(contentDirectory, 'extras', 'edition-2.md');
+const previewTemplatePath = path.join(root, 'edition-2-template.html');
+const previewOutputPath = path.join(root, 'edition-2.html');
 
 function parseDocument(source, filename) {
   const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
@@ -132,6 +135,53 @@ function renderSection(document) {
     </section>`;
 }
 
+function renderPreview(document) {
+  const { metadata, markdown } = document;
+  const introduction = marked.parse(markdown, {
+    gfm: true,
+    breaks: false
+  });
+  const dimensions = `width="${escapeHtml(metadata.panel_width)}" height="${escapeHtml(metadata.panel_height)}"`;
+  const panels = [1, 2, 3].map((number) => {
+    const src = metadata[`panel_${number}`];
+    const alt = metadata[`panel_${number}_alt`];
+    const label = metadata[`panel_${number}_label`];
+    const caption = metadata[`panel_${number}_caption`];
+
+    if (!src || !alt || !label || !caption) {
+      throw new Error(`edition-2.md is missing metadata for panel ${number}.`);
+    }
+
+    return `
+      <figure class="preview-panel preview-panel--${number}">
+        ${linkedImage({ src, alt, dimensions })}
+        <figcaption>
+          <span>${escapeHtml(label)}</span>
+          <p>${escapeHtml(caption)}</p>
+        </figcaption>
+      </figure>`;
+  }).join('\n');
+
+  return `
+  <main id="${escapeHtml(metadata.id)}">
+    <section class="preview-intro">
+      <div class="preview-intro__inner">
+        <p class="eyebrow">${escapeHtml(metadata.chapter)}</p>
+        <div class="preview-intro__copy">
+          ${introduction}
+        </div>
+      </div>
+    </section>
+    <section class="preview-sequence" aria-label="The defeat of The Obfuscator in three panels">
+      ${panels}
+    </section>
+    <section class="preview-ending">
+      <p>${escapeHtml(metadata.ending)}</p>
+      <a href="index.html">Return to Issue 1</a>
+    </section>
+  </main>`;
+}
+
 const filenames = (await readdir(contentDirectory))
   .filter((filename) => filename.endsWith('.md'))
   .sort((a, b) => a.localeCompare(b, 'en', { numeric: true }));
@@ -149,9 +199,24 @@ const documents = await Promise.all(
 
 const template = await readFile(templatePath, 'utf8');
 const sections = documents.map(renderSection).join('\n');
+const buildDate = new Date().toISOString();
 const generated = template
   .replace('<!-- GENERATED_CONTENT -->', sections)
-  .replace('<!-- BUILD_DATE -->', new Date().toISOString());
+  .replace('<!-- BUILD_DATE -->', buildDate);
 
-await writeFile(outputPath, generated, 'utf8');
+const previewSource = await readFile(previewContentPath, 'utf8');
+const previewDocument = parseDocument(previewSource, 'edition-2.md');
+const previewTemplate = await readFile(previewTemplatePath, 'utf8');
+const previewGenerated = previewTemplate
+  .replace('<!-- PAGE_DESCRIPTION -->', escapeHtml(previewDocument.metadata.description))
+  .replace('<!-- PAGE_TITLE -->', escapeHtml(previewDocument.metadata.title))
+  .replace('<!-- GENERATED_CONTENT -->', renderPreview(previewDocument))
+  .replace('<!-- BUILD_DATE -->', buildDate);
+
+await Promise.all([
+  writeFile(outputPath, generated, 'utf8'),
+  writeFile(previewOutputPath, previewGenerated, 'utf8')
+]);
+
 console.log(`Built ${path.relative(root, outputPath)} from ${filenames.length} Markdown files.`);
+console.log(`Built ${path.relative(root, previewOutputPath)} from content/extras/edition-2.md.`);
