@@ -5,11 +5,12 @@ import { marked } from 'marked';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const contentDirectory = path.join(root, 'content');
+const websiteDirectory = path.join(root, 'website');
 const templatePath = path.join(root, 'template.html');
-const outputPath = path.join(root, 'index.html');
+const outputPath = path.join(websiteDirectory, 'index.html');
 const previewContentPath = path.join(contentDirectory, 'extras', 'edition-2.md');
 const previewTemplatePath = path.join(root, 'edition-2-template.html');
-const previewOutputPath = path.join(root, 'edition-2.html');
+const previewOutputPath = path.join(websiteDirectory, 'edition-2.html');
 
 function parseDocument(source, filename) {
   const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);

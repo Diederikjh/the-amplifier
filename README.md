@@ -13,7 +13,7 @@ npm install
 npm run build
 ```
 
-The build writes the complete static page to `index.html`.
+The build writes the complete static pages to `website/index.html` and `website/edition-2.html`.
 
 ## Preview locally
 
@@ -27,11 +27,16 @@ Then open <http://localhost:4173>. Press `Ctrl+C` in the terminal to stop the se
 
 - `content/` — editable Markdown copy and section metadata
 - `content/extras/` — editable copy for bonus pages such as the Edition 2 preview
-- `template.html` — shared HTML document shell
+- `template.html` and `edition-2-template.html` — HTML document shells
 - `scripts/build.mjs` — Markdown-to-HTML build step
-- `styles.css` — responsive visual design
-- `index.html` — generated static website
-- `edition-2.html` — generated easter-egg preview page
-- `img/` — website artwork
+- `website/` — the complete public site and GitHub Pages document root
+- `website/styles.css` — responsive visual design
+- `website/index.html` — generated main page
+- `website/edition-2.html` — generated easter-egg preview page
+- `website/img/` — artwork stored directly in the published folder
 
-The generated `index.html`, `styles.css`, and `img/` directory can be hosted directly with GitHub Pages.
+The images are moved into `website/img/` permanently; the build does not copy them. The local preview server and GitHub Pages workflow expose only `website/`, so authoring files and project documentation are not publicly served.
+
+## Publish with GitHub Pages
+
+The workflow at `.github/workflows/pages.yml` publishes only the `website/` folder after changes reach `main`. In the repository’s GitHub settings, select **Settings → Pages → Source → GitHub Actions** once to enable workflow deployments.
