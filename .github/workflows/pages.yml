@@ -5,6 +5,12 @@ on:
     branches:
       - main
     paths:
+      - "content/**"
+      - "scripts/build.mjs"
+      - "template.html"
+      - "edition-2-template.html"
+      - "package.json"
+      - "package-lock.json"
       - "website/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
@@ -27,6 +33,18 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build website from Markdown
+        run: npm run build
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
