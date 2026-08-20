@@ -293,12 +293,13 @@ Suggested first-release structure:
 │   ├── ...
 │   └── 09-closing.md
 ├── template.html
-├── index.html       # generated static output; do not edit copy here
-├── styles.css
 ├── build.*          # small Markdown-to-HTML build script
-├── script.js        # optional; omit if CSS and HTML are sufficient
-└── img/
-    └── library.png
+└── website/         # the complete GitHub Pages document root
+    ├── index.html   # generated static output; do not edit copy here
+    ├── styles.css
+    ├── script.js    # optional; omit if CSS and HTML are sufficient
+    └── img/
+        └── library.png
 ```
 
 Implementation principles:
@@ -306,7 +307,7 @@ Implementation principles:
 - Keep all reader-facing copy in `content/*.md` so it can be read and reviewed without opening HTML templates.
 - Generate `index.html` from the ordered Markdown files and one lightweight page template.
 - Keep the build command small, documented, and deterministic; it should only assemble content and render Markdown.
-- Commit the generated `index.html` for direct GitHub Pages hosting, or run the same build command in GitHub Actions before publishing.
+- Commit the generated `website/index.html` for GitHub Pages hosting from the isolated `website/` directory.
 - No JavaScript framework, database, or content management system.
 - Use responsive CSS Grid and Flexbox.
 - Use native elements such as `<section>`, `<figure>`, `<blockquote>`, and `<details>`.

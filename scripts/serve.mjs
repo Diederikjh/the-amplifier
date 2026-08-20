@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const websiteDirectory = path.join(root, 'website');
 const port = Number.parseInt(process.env.PORT || '4173', 10);
 const host = process.env.HOST || '127.0.0.1';
 
@@ -22,9 +23,9 @@ const server = createServer(async (request, response) => {
   try {
     const pathname = decodeURIComponent(new URL(request.url, `http://${request.headers.host}`).pathname);
     const requested = pathname === '/' ? '/index.html' : pathname;
-    const filePath = path.resolve(root, `.${requested}`);
+    const filePath = path.resolve(websiteDirectory, `.${requested}`);
 
-    if (filePath !== root && !filePath.startsWith(`${root}${path.sep}`)) {
+    if (filePath !== websiteDirectory && !filePath.startsWith(`${websiteDirectory}${path.sep}`)) {
       response.writeHead(403).end('Forbidden');
       return;
     }
