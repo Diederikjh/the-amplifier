@@ -116,16 +116,12 @@ a:focus-visible {
   text-transform: uppercase;
 }
 
-.brand__mark {
-  display: grid;
-  width: 2.3rem;
-  height: 2.3rem;
-  place-items: center;
-  color: var(--ink);
-  background: var(--green);
-  border: 2px solid var(--paper);
-  border-radius: 50%;
-  box-shadow: 0 0 0 2px var(--ink), 0 0 22px rgba(167, 244, 50, 0.25);
+.brand__logo {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  object-fit: contain;
+  filter: drop-shadow(0 0 12px rgba(167, 244, 50, 0.3));
 }
 
 nav {
